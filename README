@@ -1,0 +1,21 @@
+ErrorHandlingFormBuilder
+========================
+
+ErrorHandlingFormBuilder is a Rails plugin created from the "Keep Forms DRY" recipe in The Pragmatic Programmers' Advanced Rails Recipes (http://pragprog.com/titles/fr_arr/advanced-rails-recipes).
+
+
+Example
+=======
+
+<% error_handling_form_for(@person) do |f| -%>
+  <%= f.text_field  :first_name %>
+  <%= f.text_field  :last_name, :label => 'Family Name' %>
+  <%= f.date_select :birthday %>
+  <%= f.select :sex, Person::SEX %>
+  <%= f.text_area   :bio %>
+  <%= f.submit 'Update' %>
+<% end -%>
+
+
+Copyright (c) 2008 The Pragmatic Programmers
+Copyright (c) 2008 Sean Santry, released under the MIT license
