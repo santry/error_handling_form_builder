@@ -11,7 +11,7 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
   helpers = field_helpers +
     %w(date_select datetime_select time_select collection_select) +
     %w(collection_select select country_select time_zone_select) -
-    %w(label fields_for)
+    %w(label fields_for hidden_field)
 
   helpers.each do |name|
     define_method name do |field, *args|
