@@ -23,11 +23,13 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def build_shell(field, options)
-    label_text = options.delete(:label)
+    label_text = build_label(field, options)
+    div_class = options.delete(:div_class)
     @template.capture do
       locals = {
         :element => yield,
-        :label   => label(field, label_text)
+        :label   => label(field, label_text),
+        :div_class => div_class
       }
       if has_errors_on?(field)
         locals.merge!(:error => error_message(field, options))
@@ -38,6 +40,15 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
                          :locals  => locals
       end
     end
+  end
+
+  def build_label(field, options)
+    label_text = label(field, options.delete(:label))
+    required_field = options.delete(:required)
+    if required_field
+      label_text.insert(label_text.index('>') + 1, '<span class="star">*</span>')
+    end
+    label_text
   end
 
   def error_message(field, options)
