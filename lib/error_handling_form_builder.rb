@@ -25,7 +25,14 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
   def build_shell(field, options)
     label_text = build_label(field, options)
     div_class = options.delete(:div_class)
-    @template.capture do
+
+    if @template.respond_to?(:capture_without_haml)
+      capture_method = 'capture_without_haml'
+    else
+      capture_method = 'capture'
+    end
+
+    @template.send(capture_method) do
       locals = {
         :element => yield,
         :label   => label(field, label_text),
