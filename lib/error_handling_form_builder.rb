@@ -35,7 +35,7 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
     @template.send(capture_method) do
       locals = {
         :element => yield,
-        :label   => label(field, label_text),
+        :label   => label_text,
         :div_class => div_class
       }
       if has_errors_on?(field)
